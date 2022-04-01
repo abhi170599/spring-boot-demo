@@ -8,6 +8,9 @@ import javax.validation.Valid;
 import com.absoft.springsample.entities.Post;
 import com.absoft.springsample.exceptions.NotFoundException;
 import com.absoft.springsample.repositories.PostRepository;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -16,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,8 +34,14 @@ public class PostController {
     private PostRepository postRepo;
 
     @GetMapping(path = "/posts")
-    public List<Post> retrieveAllPosts() {
-        return postRepo.findAll();
+    public MappingJacksonValue retrieveAllPosts() {
+        List<Post> posts = postRepo.findAll();
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("userId", "description");
+        FilterProvider filters = new SimpleFilterProvider().addFilter("PostIdFilter", filter);
+        MappingJacksonValue mapping = new MappingJacksonValue(posts);
+        mapping.setFilters(filters);
+
+        return mapping;
     }
 
     @GetMapping(path = "/posts/{id}")

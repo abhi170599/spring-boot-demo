@@ -2,6 +2,8 @@ package com.absoft.springsample.entities;
 
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+
 import org.springframework.lang.NonNull;
 
 /**
@@ -9,6 +11,8 @@ import org.springframework.lang.NonNull;
  * 
  * @author Abhishek Jha
  */
+
+@JsonFilter("PostIdFilter")
 public class Post {
 
     private int id;
