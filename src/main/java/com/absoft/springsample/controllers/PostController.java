@@ -34,14 +34,9 @@ public class PostController {
     private PostRepository postRepo;
 
     @GetMapping(path = "/posts")
-    public MappingJacksonValue retrieveAllPosts() {
+    public List<Post> retrieveAllPosts() {
         List<Post> posts = postRepo.findAll();
-        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("userId", "description");
-        FilterProvider filters = new SimpleFilterProvider().addFilter("PostIdFilter", filter);
-        MappingJacksonValue mapping = new MappingJacksonValue(posts);
-        mapping.setFilters(filters);
-
-        return mapping;
+        return posts;
     }
 
     @GetMapping(path = "/posts/{id}")

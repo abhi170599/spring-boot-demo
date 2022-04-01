@@ -12,7 +12,6 @@ import org.springframework.lang.NonNull;
  * @author Abhishek Jha
  */
 
-@JsonFilter("PostIdFilter")
 public class Post {
 
     private int id;
