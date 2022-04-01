@@ -1,5 +1,9 @@
 package com.absoft.springsample.entities;
 
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.lang.NonNull;
+
 /**
  * Post is a representation of post created by user
  * 
@@ -9,8 +13,10 @@ public class Post {
 
     private int id;
 
+    @NotBlank
     private String description;
 
+    @NonNull
     private int userId;
 
     public Post() {

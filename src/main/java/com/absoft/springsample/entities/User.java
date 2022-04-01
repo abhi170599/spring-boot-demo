@@ -1,5 +1,10 @@
 package com.absoft.springsample.entities;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
+
+import org.springframework.lang.NonNull;
+
 /**
  * User is the representation of a user
  * 
@@ -9,8 +14,11 @@ public class User {
 
     private int id;
 
+    @Size(min = 2, message = "Name must have atleast 2 characters")
     private String name;
 
+    @NonNull
+    @Email
     private String email;
 
     public User() {
