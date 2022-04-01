@@ -3,6 +3,7 @@ package com.absoft.springsample.controllers;
 import java.util.List;
 
 import com.absoft.springsample.entities.Post;
+import com.absoft.springsample.exceptions.NotFoundException;
 import com.absoft.springsample.repositories.PostRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,11 @@ public class PostController {
 
     @GetMapping(path = "/posts/{id}")
     public Post retrievePost(@PathVariable int id) {
-        return postRepo.findOne(id);
+        Post post = postRepo.findOne(id);
+        if (post == null) {
+            throw new NotFoundException(String.format("Post not found id = %s", id));
+        }
+        return post;
     }
 
     @PostMapping(path = "/posts")

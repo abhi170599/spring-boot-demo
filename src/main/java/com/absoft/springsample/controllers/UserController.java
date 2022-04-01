@@ -3,7 +3,7 @@ package com.absoft.springsample.controllers;
 import java.util.List;
 
 import com.absoft.springsample.entities.User;
-
+import com.absoft.springsample.exceptions.NotFoundException;
 import com.absoft.springsample.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +27,20 @@ public class UserController {
 
     @GetMapping(path = "/users/{id}")
     public User retrieveUser(@PathVariable int id) {
-        return userRepo.findById(id);
+        User user = userRepo.findById(id);
+        if (user == null) {
+            throw new NotFoundException(String.format("User not found, id = %s", id));
+        }
+        return user;
     }
 
     @DeleteMapping(path = "/users/{id}")
     public User deleteUser(@PathVariable int id) {
-        return userRepo.deleteById(id);
+        User user = userRepo.deleteById(id);
+        if (user == null) {
+            throw new NotFoundException(String.format("User not found, id = %s", id));
+        }
+        return user;
     }
 
     @PostMapping(path = "/users")
