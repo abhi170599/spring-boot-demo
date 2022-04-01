@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.absoft.springsample.entities.Post;
+import com.absoft.springsample.entities.User;
 
 import org.springframework.stereotype.Component;
 
@@ -17,8 +18,8 @@ public class PostRepository {
      * Initialize dummy data
      */
     static {
-        posts.add(new Post(1, 1, "sample post 1"));
-        posts.add(new Post(2, 1, "sample post 2"));
+        posts.add(new Post(1, new User(1001, "Steve Rogers", "captain.america@gmail.com"), "sample post 1"));
+        posts.add(new Post(2, new User(1001, "Steve Rogers", "captain.america@gmail.com"), "sample post 2"));
     }
 
     public List<Post> findAll() {
@@ -36,7 +37,7 @@ public class PostRepository {
     public List<Post> findAllByUser(int userId) {
         List<Post> userPosts = new ArrayList<>();
         for (Post post : posts) {
-            if (post.getUserId() == userId)
+            if (post.getUser().getId() == userId)
                 userPosts.add(post);
         }
         return userPosts;

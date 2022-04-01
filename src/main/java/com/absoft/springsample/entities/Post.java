@@ -1,9 +1,15 @@
 package com.absoft.springsample.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import org.hibernate.annotations.Fetch;
 import org.springframework.lang.NonNull;
 
 /**
@@ -11,23 +17,26 @@ import org.springframework.lang.NonNull;
  * 
  * @author Abhishek Jha
  */
-
+@Entity
 public class Post {
 
+    @Id
+    @GeneratedValue
     private int id;
 
     @NotBlank
     private String description;
 
-    @NonNull
-    private int userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private User user;
 
     public Post() {
     }
 
-    public Post(int id, int userId, String description) {
+    public Post(int id, User user, String description) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
         this.description = description;
     }
 
@@ -43,12 +52,12 @@ public class Post {
         return description;
     }
 
-    public int getUserId() {
-        return userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public User getUser() {
+        return this.user;
     }
 
     public void setDescription(String description) {

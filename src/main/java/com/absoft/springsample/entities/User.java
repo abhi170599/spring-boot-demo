@@ -1,5 +1,12 @@
 package com.absoft.springsample.entities;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
@@ -10,8 +17,12 @@ import org.springframework.lang.NonNull;
  * 
  * @author Abhishek Jha
  */
+
+@Entity
 public class User {
 
+    @Id
+    @GeneratedValue
     private int id;
 
     @Size(min = 2, message = "Name must have atleast 2 characters")
@@ -20,6 +31,17 @@ public class User {
     @NonNull
     @Email
     private String email;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
 
     public User() {
     }
