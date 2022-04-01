@@ -3,6 +3,8 @@ package com.absoft.springsample.controllers;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.absoft.springsample.entities.Post;
 import com.absoft.springsample.exceptions.NotFoundException;
 import com.absoft.springsample.repositories.PostRepository;
@@ -49,7 +51,7 @@ public class PostController {
     }
 
     @PostMapping(path = "/posts")
-    public ResponseEntity<Object> createPost(@RequestBody Post post) {
+    public ResponseEntity<Object> createPost(@Valid @RequestBody Post post) {
         Post savedPost = postRepo.save(post);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

@@ -3,6 +3,8 @@ package com.absoft.springsample.controllers;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.absoft.springsample.entities.User;
 import com.absoft.springsample.exceptions.NotFoundException;
 import com.absoft.springsample.repositories.UserRepository;
@@ -57,7 +59,7 @@ public class UserController {
     }
 
     @PostMapping(path = "/users")
-    public ResponseEntity<Object> createUser(@RequestBody User user) {
+    public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
         User savedUser = userRepo.save(user);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
