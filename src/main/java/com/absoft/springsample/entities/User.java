@@ -7,31 +7,15 @@ package com.absoft.springsample.entities;
  */
 public class User {
 
-    /**
-     * The unique Id for the user
-     */
     private int id;
-    /**
-     * Name of the user
-     */
+
     private String name;
-    /**
-     * Email of the user
-     */
+
     private String email;
 
     public User() {
     }
 
-    /**
-     * <p>
-     * Parameterized constructor for User
-     * <p>
-     * 
-     * @param id    unique id for the user
-     * @param name  name of the user
-     * @param email email of the user
-     */
     public User(int id, String name, String email) {
         this.id = id;
         this.name = name;

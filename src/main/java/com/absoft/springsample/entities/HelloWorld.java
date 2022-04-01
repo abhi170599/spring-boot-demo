@@ -6,21 +6,12 @@ package com.absoft.springsample.entities;
  * @author Abhishek Jha
  */
 public class HelloWorld {
-    /**
-     * The greeting message
-     */
+
     private String message;
 
     public HelloWorld() {
     }
 
-    /**
-     * <p>
-     * Parameterized constructor for HelloWorld
-     * </p>
-     * 
-     * @param message the message to be used as greeting
-     */
     public HelloWorld(String message) {
         this.message = message;
     }
