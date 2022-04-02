@@ -9,8 +9,6 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import org.hibernate.annotations.Fetch;
-import org.springframework.lang.NonNull;
 
 /**
  * Post is a representation of post created by user

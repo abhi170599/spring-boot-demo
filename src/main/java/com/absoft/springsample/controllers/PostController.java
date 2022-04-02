@@ -12,7 +12,6 @@ import com.absoft.springsample.exceptions.NotFoundException;
 import com.absoft.springsample.repositories.PostJpaRepository;
 import com.absoft.springsample.repositories.PostRepository;
 import com.absoft.springsample.repositories.UserJpaRepository;
-import com.absoft.springsample.repositories.UserRepository;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -37,9 +36,6 @@ public class PostController {
 
     @Autowired
     private PostJpaRepository postJpaRepo;
-
-    @Autowired
-    private UserRepository userRepo;
 
     @Autowired
     private UserJpaRepository userJpaRepo;
